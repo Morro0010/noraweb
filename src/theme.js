@@ -1,54 +1,66 @@
-import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
+import { extendTheme } from '@chakra-ui/react'
 
 const brand = {
-  50: { value: '#ffecef' },
-  100: { value: '#ffd4dc' },
-  200: { value: '#ffb0c0' },
-  300: { value: '#ff8da5' },
-  400: { value: '#fa6d8c' },
-  500: { value: '#e65273' },
-  600: { value: '#c83d5f' },
-  700: { value: '#9d2f4b' },
-  800: { value: '#742338' },
-  900: { value: '#511829' },
+  50: '#ffecef',
+  100: '#ffd4dc',
+  200: '#ffb0c0',
+  300: '#ff8da5',
+  400: '#fa6d8c',
+  500: '#e65273',
+  600: '#c83d5f',
+  700: '#9d2f4b',
+  800: '#742338',
+  900: '#511829',
 }
 
-const customConfig = defineConfig({
-  theme: {
-    tokens: {
-      colors: {
-        brand,
+const theme = extendTheme({
+  colors: {
+    brand,
+  },
+  fonts: {
+    heading: "'Space Grotesk', 'Manrope', system-ui, -apple-system, sans-serif",
+    body: "'Manrope', system-ui, -apple-system, sans-serif",
+  },
+  styles: {
+    global: {
+      html: {
+        scrollBehavior: 'smooth',
       },
-      fonts: {
-        heading: { value: "'Space Grotesk', 'Manrope', system-ui, -apple-system, sans-serif" },
-        body: { value: "'Manrope', system-ui, -apple-system, sans-serif" },
+      body: {
+        margin: 0,
+        color: '#0f1015',
+        backgroundColor: '#f8f7fb',
+        backgroundImage: `
+          radial-gradient(circle at 15% 20%, rgba(250, 109, 140, 0.16), transparent 35%),
+          radial-gradient(circle at 85% 0%, rgba(99, 102, 241, 0.12), transparent 30%),
+          linear-gradient(180deg, #fdfcff 0%, #f6f8fb 60%, #f7f6fb 100%)
+        `,
+      },
+      'h1, h2, h3, h4': {
+        letterSpacing: '-0.02em',
+      },
+      '::selection': {
+        background: brand[100],
+        color: '#0f1015',
       },
     },
   },
-  globalCss: {
-    html: {
-      scrollBehavior: 'smooth',
+  components: {
+    Button: {
+      baseStyle: {
+        rounded: 'full',
+        fontWeight: '600',
+      },
+      defaultProps: {
+        colorScheme: 'brand',
+      },
     },
-    body: {
-      margin: 0,
-      color: '#0f1015',
-      backgroundColor: '#f8f7fb',
-      backgroundImage: `
-        radial-gradient(circle at 15% 20%, rgba(250, 109, 140, 0.16), transparent 35%),
-        radial-gradient(circle at 85% 0%, rgba(99, 102, 241, 0.12), transparent 30%),
-        linear-gradient(180deg, #fdfcff 0%, #f6f8fb 60%, #f7f6fb 100%)
-      `,
-    },
-    'h1, h2, h3, h4': {
-      letterSpacing: '-0.02em',
-    },
-    '::selection': {
-      background: brand[100].value,
-      color: '#0f1015',
+    Heading: {
+      baseStyle: {
+        letterSpacing: '-0.02em',
+      },
     },
   },
 })
-
-const theme = createSystem(defaultConfig, customConfig)
 
 export default theme

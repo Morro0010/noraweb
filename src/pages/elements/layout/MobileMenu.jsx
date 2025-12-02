@@ -1,11 +1,13 @@
 import {
   Box,
   Drawer,
-  DrawerCloseTrigger,
-  Flex,
-  IconButton,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
   DrawerHeader,
   DrawerBody,
+  Flex,
+  IconButton,
   VStack,
   Button,
   Heading,
@@ -62,76 +64,64 @@ export function MobileMenu() {
         colorScheme="whiteAlpha"
       />
 
-      <Drawer.Root
-        placement="left"
-        open={isOpen}
-        onOpenChange={({ open }) => (open ? onOpen() : onClose())}
-      >
-        <Drawer.Backdrop />
-        <Drawer.Positioner>
-          <Drawer.Content
-            bg="gray.900"
-            color="white"
-            pt={4}
-            pb={6}
-            px={4}
-          >
-            <DrawerCloseTrigger position="absolute" top={4} right={4} color="white" />
-            <DrawerHeader borderBottomWidth="1px" borderColor="whiteAlpha.200">
-              <Flex align="center" justify="space-between">
-                <HStack spacing={3}>
-                  <Box
-                    w="42px"
-                    h="42px"
-                    bg="brand.400"
-                    rounded="md"
-                    display="grid"
-                    placeItems="center"
-                    fontWeight="extrabold"
-                  >
-                    L.
-                  </Box>
-                  <Box>
-                    <Heading size="md">{t('appTitle')}</Heading>
-                  </Box>
-                </HStack>
-              </Flex>
-            </DrawerHeader>
+      <Drawer placement="left" isOpen={isOpen} onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent bg="gray.900" color="white">
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px" borderColor="whiteAlpha.200">
+            <Flex align="center" justify="space-between">
+              <HStack spacing={3}>
+                <Box
+                  w="42px"
+                  h="42px"
+                  bg="brand.400"
+                  rounded="md"
+                  display="grid"
+                  placeItems="center"
+                  fontWeight="extrabold"
+                >
+                  L.
+                </Box>
+                <Box>
+                  <Heading size="md">{t('appTitle')}</Heading>
+                </Box>
+              </HStack>
+            </Flex>
+          </DrawerHeader>
 
-            <DrawerBody>
-              <VStack spacing={4} align="stretch" mt={6}>
-                <Button
-                  variant="ghost"
-                  justifyContent="flex-start"
-                  color="white"
-                  _hover={{ bg: 'whiteAlpha.100' }}
-                  onClick={onClose}
-                >
-                  {t('navSchedule')}
-                </Button>
-                <Button
-                  variant="ghost"
-                  justifyContent="flex-start"
-                  color="white"
-                  _hover={{ bg: 'whiteAlpha.100' }}
-                  onClick={onClose}
-                >
-                  {t('navClients')}
-                </Button>
-                <Button
-                  variant="ghost"
-                  justifyContent="flex-start"
-                  color="white"
-                  _hover={{ bg: 'whiteAlpha.100' }}
-                  onClick={onClose}
-                >
-                  {t('navDocuments')}
-                </Button>
-              </VStack>
-            </DrawerBody>
-          </Drawer.Content>
-        </Drawer.Positioner>
-      </Drawer.Root>
+          <DrawerBody>
+            <VStack spacing={4} align="stretch" mt={6}>
+              <Button
+                variant="ghost"
+                justifyContent="flex-start"
+                color="white"
+                _hover={{ bg: 'whiteAlpha.100' }}
+                onClick={onClose}
+              >
+                {t('navSchedule')}
+              </Button>
+              <Button
+                variant="ghost"
+                justifyContent="flex-start"
+                color="white"
+                _hover={{ bg: 'whiteAlpha.100' }}
+                onClick={onClose}
+              >
+                {t('navClients')}
+              </Button>
+              <Button
+                variant="ghost"
+                justifyContent="flex-start"
+                color="white"
+                _hover={{ bg: 'whiteAlpha.100' }}
+                onClick={onClose}
+              >
+                {t('navDocuments')}
+              </Button>
+            </VStack>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </Box>
   )
 }
